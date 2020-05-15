@@ -23,9 +23,19 @@ public class JiraProjectSync {
 	private Map<String, TransitionConfig> transitions = new LinkedHashMap<>();
 	private Map<String, String> versionMapping = new LinkedHashMap<>();
 	private Set<String> versionsToIgnore = new LinkedHashSet<>();
+	private Map<String, String> componentMapping = new LinkedHashMap<>();
+	private Set<String> componentsToIgnore = new LinkedHashSet<>();
 	private Set<String> skipUpdateInTargetWhenStatusIn = new LinkedHashSet<>();
 	private boolean copyCommentsToTarget = false;
 	private Map<String, Map<String, String>> fieldValueMappings = new LinkedHashMap<>();
+
+	public JiraProjectSync() {
+	}
+
+	public JiraProjectSync(String sourceProject, String targetProject) {
+		this.sourceProject = sourceProject;
+		this.targetProject = targetProject;
+	}
 
 	public String getSourceProject() {
 		return sourceProject;
@@ -111,6 +121,22 @@ public class JiraProjectSync {
 		return versionsToIgnore;
 	}
 
+	public Map<String, String> getComponentMapping() {
+		return componentMapping;
+	}
+
+	public void setComponentMapping(Map<String, String> componentMapping) {
+		this.componentMapping = componentMapping;
+	}
+
+	public void setComponentsToIgnore(Set<String> componentsToIgnore) {
+		this.componentsToIgnore = componentsToIgnore;
+	}
+
+	public Set<String> getComponentsToIgnore() {
+		return componentsToIgnore;
+	}
+
 	public void setSkipUpdateInTargetWhenStatusIn(Set<String> skipUpdateInTargetWhenStatusIn) {
 		this.skipUpdateInTargetWhenStatusIn = skipUpdateInTargetWhenStatusIn;
 	}
@@ -142,4 +168,5 @@ public class JiraProjectSync {
 			.append("targetProject", targetProject)
 			.toString();
 	}
+
 }
